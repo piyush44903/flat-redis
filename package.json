@@ -1,0 +1,37 @@
+{
+  "name": "flat-redis",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -u tdd --reporter spec && standard index.js test/index.js"
+  },
+  "license": "BSD-3-Clause",
+  "description": "Uses <a href='https://www.npmjs.com/package/flat'> flat </a> npm module with slight modifications intended to make objects storable in redis hmsets.",
+  "devDependencies": {
+    "mocha": "~3.4.2",
+    "standard": "^10.0.2"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "is-buffer": "~1.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/piyush44903/flat-redis"
+  },
+  "keywords": [
+    "flat",
+    "json",
+    "flatten",
+    "unflatten",
+    "split",
+    "object",
+    "nested",
+    "redis",
+    "hmset"
+  ],
+  "author": "Piyush <piyush44903@gmail.com>",
+  "homepage": "https://github.com/piyush44903/flat-redis"
+}
