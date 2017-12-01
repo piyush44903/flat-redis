@@ -1,5 +1,6 @@
-# flat [![Build Status](https://secure.travis-ci.org/hughsk/flat.png?branch=master)](http://travis-ci.org/hughsk/flat)
+# flat-redis
 
+An updated version of 'flat' npm module to create/retrieve nested redis hmset objects.
 Take a nested Javascript object and flatten it, or unflatten an object with
 delimited keys.
 
