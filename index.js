@@ -6,7 +6,7 @@ module.exports = {
 };
 
 function flatten (target, opts) {
-	opts = opts || { accBlankObjects: true, filterNulls: true }
+	opts = opts || { accBlankObjects: true, filterNulls: true };
 
 	var delimiter = opts.delimiter || '.';
 	let maxDepth = opts.maxDepth;
@@ -35,15 +35,17 @@ function flatten (target, opts) {
 
 			if (opts.accBlankObjects && isobject && Object.keys(value).length === 0) {
 				if (Array.isArray(value)) {
-					output[newKey] = '_E_ARR';
+					output[newKey] = 'E_ARR';
 				} else {
-					output[newKey] = '_E_OBJ';
+					output[newKey] = 'E_OBJ';
 				}
-				target['EMPTY_KEYS'] = target['EMPTY_KEYS'].concat([newKey]);
+				if (newKey !== 'E_ARR' && newKey !== 'E_OBJ') {
+					cpTarget['EMPTY_KEYS'] = cpTarget['EMPTY_KEYS'].concat([newKey]);
+				}
 				return;
 			}
 
-			if (filterNulls && value !== null) {
+			if (opts.filterNulls && value !== null) {
 				output[newKey] = value;
 			}
 		})
@@ -53,6 +55,9 @@ function flatten (target, opts) {
 	cpTarget['EMPTY_KEYS'] = [];
 	step(cpTarget);
 
+	if (output['EMPTY_KEYS'] === 'E_ARR') {
+		output['EMPTY_KEYS'] = [];
+	}
 	return output;
 }
 
@@ -121,7 +126,7 @@ function unflatten (target, opts) {
 		recipient[key1] = unflatten(target[key], opts)
 	})
 
-	const emap = { '_E_OBJ': {}, '_E_ARR': [] };
+	const emap = { 'E_OBJ': {}, 'E_ARR': [] };
 	result = result['EMPTY_KEYS'].reduce((acc, ek) => {
 		const pathTo = ek.split('.');
 		let brefp = acc;
